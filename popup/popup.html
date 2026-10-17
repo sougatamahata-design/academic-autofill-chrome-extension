@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AcadFill</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-brand">
+      <div class="brand-icon">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 3L1 9L12 15L21 10.09V17H23V9L12 3Z" fill="currentColor"/>
+          <path d="M5 13.18V17.18L12 21L19 17.18V13.18L12 17L5 13.18Z" fill="currentColor"/>
+        </svg>
+      </div>
+      <span class="brand-name">AcadFill</span>
+    </div>
+    <div class="header-actions">
+      <button class="btn-icon" id="btn-settings" title="Settings">
+        <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" stroke="currentColor" stroke-width="2"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main">
+
+    <!-- View: Home / Candidate Selector -->
+    <div id="view-home" class="view active">
+      <!-- Candidate Selector Bar -->
+      <div class="candidate-bar">
+        <div class="candidate-selector-wrap">
+          <label class="field-label">Active Candidate</label>
+          <div class="candidate-select-row">
+            <select id="candidate-select" class="candidate-select">
+              <option value="">-- Select Candidate --</option>
+            </select>
+            <button class="btn-icon" id="btn-add-candidate" title="Add new candidate">
+              <svg viewBox="0 0 24 24" fill="none"><line x1="12" y1="5" x2="12" y2="19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="5" y1="12" x2="19" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            </button>
+            <button class="btn-icon btn-danger" id="btn-delete-candidate" title="Delete candidate">
+              <svg viewBox="0 0 24 24" fill="none"><polyline points="3 6 5 6 21 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M19 6l-1 14H6L5 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M10 11v6M14 11v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M9 6V4h6v2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Stats -->
+      <div id="candidate-stats" class="candidate-stats hidden">
+        <div class="stat-card" id="stat-name">
+          <span class="stat-label">Name</span>
+          <span class="stat-value" id="stat-name-val">—</span>
+        </div>
+        <div class="stat-card" id="stat-quals">
+          <span class="stat-label">Qualifications</span>
+          <span class="stat-value" id="stat-quals-val">0</span>
+        </div>
+        <div class="stat-card" id="stat-papers">
+          <span class="stat-label">Publications</span>
+          <span class="stat-value" id="stat-papers-val">0</span>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="action-grid">
+        <button class="action-card" id="btn-edit-profile">
+          <div class="action-icon blue">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="7" r="4" stroke="currentColor" stroke-width="2"/></svg>
+          </div>
+          <span class="action-label">Personal Info</span>
+          <span class="action-sub">Name, contact, address</span>
+        </button>
+        <button class="action-card" id="btn-edit-academic">
+          <div class="action-icon indigo">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M12 3L1 9L12 15L21 10.09V17H23V9L12 3Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 13.18V17.18L12 21L19 17.18V13.18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <span class="action-label">Qualifications</span>
+          <span class="action-sub">All academic levels</span>
+        </button>
+        <button class="action-card" id="btn-edit-publications">
+          <div class="action-icon teal">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><polyline points="14 2 14 8 20 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><line x1="16" y1="13" x2="8" y2="13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="16" y1="17" x2="8" y2="17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <span class="action-label">Publications</span>
+          <span class="action-sub">Research papers</span>
+        </button>
+        <button class="action-card" id="btn-autofill-now">
+          <div class="action-icon green">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M12 22C6.48 22 2 17.52 2 12S6.48 2 12 2s10 4.48 10 10-4.48 10-10 10z" stroke="currentColor" stroke-width="2"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <span class="action-label">Autofill Now</span>
+          <span class="action-sub">Fill active page</span>
+        </button>
+      </div>
+
+      <!-- Autofill Status -->
+      <div id="autofill-status" class="autofill-status hidden"></div>
+    </div>
+
+    <!-- View: Personal Info -->
+    <div id="view-personal" class="view">
+      <div class="view-header">
+        <button class="btn-back" id="back-from-personal">
+          <svg viewBox="0 0 24 24" fill="none"><polyline points="15 18 9 12 15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Back
+        </button>
+        <h2 class="view-title">Personal Information</h2>
+      </div>
+      <div class="form-scroll">
+        <div class="form-section">
+          <h3 class="section-title">Basic Details</h3>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="field-label">First Name *</label>
+              <input type="text" id="p-first-name" class="field-input" placeholder="John" />
+            </div>
+            <div class="form-group">
+              <label class="field-label">Middle Name</label>
+              <input type="text" id="p-middle-name" class="field-input" placeholder="(optional)" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="field-label">Last Name / Surname *</label>
+            <input type="text" id="p-last-name" class="field-input" placeholder="Doe" />
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="field-label">Date of Birth</label>
+              <input type="date" id="p-dob" class="field-input" />
+            </div>
+            <div class="form-group">
+              <label class="field-label">Gender</label>
+              <select id="p-gender" class="field-input">
+                <option value="">Select</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+                <option value="Prefer not to say">Prefer not to say</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="field-label">Category</label>
+              <select id="p-category" class="field-input">
+                <option value="">Select</option>
+                <option value="General">General / UR</option>
+                <option value="OBC">OBC</option>
+                <option value="OBC-NCL">OBC-NCL</option>
+                <option value="SC">SC</option>
+                <option value="ST">ST</option>
+                <option value="EWS">EWS</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="field-label">Nationality</label>
+              <input type="text" id="p-nationality" class="field-input" placeholder="Indian" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="field-label">Religion</label>
+              <input type="text" id="p-religion" class="field-input" placeholder="(optional)" />
+            </div>
+            <div class="form-group">
+              <label class="field-label">Physically Disabled?</label>
+              <select id="p-disabled" class="field-input">
+                <option value="No">No</option>
+                <option value="Yes">Yes</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h3 class="section-title">Contact Details</h3>
+          <div class="form-group">
+            <label class="field-label">Email Address *</label>
+            <input type="email" id="p-email" class="field-input" placeholder="john@example.com" />
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="field-label">Mobile Number *</label>
+              <input type="tel" id="p-mobile" class="field-input" placeholder="+91 XXXXX XXXXX" />
+            </div>
+            <div class="form-group">
+              <label class="field-label">Alternate Mobile</label>
+              <input type="tel" id="p-mobile-alt" class="field-input" placeholder="(optional)" />
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h3 class="section-title">Identity Documents</h3>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="field-label">Aadhaar Number</label>
+              <input type="text" id="p-aadhaar" class="field-input" placeholder="XXXX XXXX XXXX" />
+            </div>
+            <div class="form-group">
+              <label class="field-label">PAN Number</label>
+              <input type="text" id="p-pan" class="field-input" placeholder="ABCDE1234F" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="field-label">Passport Number</label>
+              <input type="text" id="p-passport" class="field-input" placeholder="(optional)" />
+            </div>
+            <div class="form-group">
+              <label class="field-label">Father's Name</label>
+              <input type="text" id="p-father-name" class="field-input" placeholder="Father's full name" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="field-label">Mother's Name</label>
+            <input type="text" id="p-mother-name" class="field-input" placeholder="Mother's full name" />
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h3 class="section-title">Permanent Address</h3>
+          <div class="form-group">
+            <label class="field-label">Address Line 1 *</label>
+            <input type="text" id="p-addr1" class="field-input" placeholder="House/Flat No., Street" />
+          </div>
+          <div class="form-group">
+            <label class="field-label">Address Line 2</label>
+            <input type="text" id="p-addr2" class="field-input" placeholder="Locality, Area (optional)" />
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="field-label">City *</label>
+              <input type="text" id="p-city" class="field-input" placeholder="City" />
+            </div>
+            <div class="form-group">
+              <label class="field-label">District</label>
+              <input type="text" id="p-district" class="field-input" placeholder="District" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="field-label">State *</label>
+              <input type="text" id="p-state" class="field-input" placeholder="State" />
+            </div>
+            <div class="form-group">
+              <label class="field-label">PIN Code *</label>
+              <input type="text" id="p-pincode" class="field-input" placeholder="110001" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="field-label">Country</label>
+            <input type="text" id="p-country" class="field-input" placeholder="India" />
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h3 class="section-title">
+            Correspondence Address
+            <label class="checkbox-inline">
+              <input type="checkbox" id="p-same-address" />
+              <span>Same as permanent</span>
+            </label>
+          </h3>
+          <div id="correspondence-fields">
+            <div class="form-group">
+              <label class="field-label">Address Line 1</label>
+              <input type="text" id="p-caddr1" class="field-input" placeholder="House/Flat No., Street" />
+            </div>
+            <div class="form-group">
+              <label class="field-label">Address Line 2</label>
+              <input type="text" id="p-caddr2" class="field-input" placeholder="Locality, Area" />
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="field-label">City</label>
+                <input type="text" id="p-ccity" class="field-input" placeholder="City" />
+              </div>
+              <div class="form-group">
+                <label class="field-label">State</label>
+                <input type="text" id="p-cstate" class="field-input" placeholder="State" />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="field-label">PIN Code</label>
+                <input type="text" id="p-cpincode" class="field-input" placeholder="110001" />
+              </div>
+              <div class="form-group">
+                <label class="field-label">Country</label>
+                <input type="text" id="p-ccountry" class="field-input" placeholder="India" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button class="btn-primary" id="save-personal">Save Personal Info</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- View: Academic Qualifications -->
+    <div id="view-academic" class="view">
+      <div class="view-header">
+        <button class="btn-back" id="back-from-academic">
+          <svg viewBox="0 0 24 24" fill="none"><polyline points="15 18 9 12 15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Back
+        </button>
+        <h2 class="view-title">Academic Qualifications</h2>
+        <button class="btn-sm-primary" id="btn-add-qualification">+ Add Level</button>
+      </div>
+      <div class="form-scroll">
+        <div id="qualifications-list"></div>
+        <div class="empty-state hidden" id="qual-empty">
+          <svg viewBox="0 0 24 24" fill="none" width="48" height="48"><path d="M12 3L1 9L12 15L21 10.09V17H23V9L12 3Z" stroke="#c7d2fe" stroke-width="1.5"/><path d="M5 13.18V17.18L12 21L19 17.18V13.18" stroke="#c7d2fe" stroke-width="1.5"/></svg>
+          <p>No qualifications added yet.</p>
+          <button class="btn-primary" id="btn-add-qual-empty">Add Qualification</button>
+        </div>
+        <div class="form-actions">
+          <button class="btn-primary" id="save-academic">Save Qualifications</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- View: Publications -->
+    <div id="view-publications" class="view">
+      <div class="view-header">
+        <button class="btn-back" id="back-from-publications">
+          <svg viewBox="0 0 24 24" fill="none"><polyline points="15 18 9 12 15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Back
+        </button>
+        <h2 class="view-title">Publications</h2>
+        <button class="btn-sm-primary" id="btn-add-publication">+ Add</button>
+      </div>
+      <div class="form-scroll">
+        <div id="publications-list"></div>
+        <div class="empty-state" id="pub-empty">
+          <svg viewBox="0 0 24 24" fill="none" width="48" height="48"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="#c7d2fe" stroke-width="1.5"/><polyline points="14 2 14 8 20 8" stroke="#c7d2fe" stroke-width="1.5"/></svg>
+          <p>No publications added yet.</p>
+          <button class="btn-primary" id="btn-add-pub-empty">Add Publication</button>
+        </div>
+        <div class="form-actions">
+          <button class="btn-primary" id="save-publications">Save Publications</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- View: Settings -->
+    <div id="view-settings" class="view">
+      <div class="view-header">
+        <button class="btn-back" id="back-from-settings">
+          <svg viewBox="0 0 24 24" fill="none"><polyline points="15 18 9 12 15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Back
+        </button>
+        <h2 class="view-title">Settings</h2>
+      </div>
+      <div class="form-scroll">
+        <div class="form-section">
+          <h3 class="section-title">Autofill Behavior</h3>
+          <div class="toggle-row">
+            <div>
+              <span class="toggle-label">Show floating fill button on pages</span>
+              <span class="toggle-desc">Display a button on academic portals to trigger autofill</span>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox" id="setting-floating-btn" checked />
+              <span class="toggle-track"></span>
+            </label>
+          </div>
+          <div class="toggle-row">
+            <div>
+              <span class="toggle-label">Highlight filled fields</span>
+              <span class="toggle-desc">Briefly highlight fields after they are filled</span>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox" id="setting-highlight" checked />
+              <span class="toggle-track"></span>
+            </label>
+          </div>
+          <div class="toggle-row">
+            <div>
+              <span class="toggle-label">Show fill report</span>
+              <span class="toggle-desc">Show a summary of filled/skipped fields after autofill</span>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox" id="setting-report" checked />
+              <span class="toggle-track"></span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h3 class="section-title">Data Management</h3>
+          <div class="data-actions">
+            <button class="btn-outline" id="btn-export-data">
+              <svg viewBox="0 0 24 24" fill="none" width="16" height="16"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><polyline points="7 10 12 15 17 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><line x1="12" y1="15" x2="12" y2="3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              Export All Data
+            </button>
+            <button class="btn-outline" id="btn-import-data">
+              <svg viewBox="0 0 24 24" fill="none" width="16" height="16"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><polyline points="7 10 12 15 17 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><line x1="12" y1="15" x2="12" y2="3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              Import Data
+            </button>
+            <input type="file" id="import-file-input" accept=".json" class="hidden" />
+            <button class="btn-danger-outline" id="btn-clear-all">
+              <svg viewBox="0 0 24 24" fill="none" width="16" height="16"><polyline points="3 6 5 6 21 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M19 6l-1 14H6L5 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              Clear All Data
+            </button>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h3 class="section-title">About</h3>
+          <div class="about-card">
+            <div class="about-icon">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M12 3L1 9L12 15L21 10.09V17H23V9L12 3Z" fill="#4f46e5"/><path d="M5 13.18V17.18L12 21L19 17.18V13.18" fill="#4f46e5" opacity="0.6"/></svg>
+            </div>
+            <div>
+              <div class="about-name">AcadFill v1.0.0</div>
+              <div class="about-desc">Academic Admission Autofill Extension</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Add Candidate Modal -->
+  <div id="modal-add-candidate" class="modal-overlay hidden">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Add Candidate Profile</h3>
+        <button class="btn-icon modal-close" data-modal="modal-add-candidate">
+          <svg viewBox="0 0 24 24" fill="none"><line x1="18" y1="6" x2="6" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="6" y1="6" x2="18" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="field-label">Profile Name (e.g. "John Doe" or "Self")</label>
+          <input type="text" id="new-candidate-name" class="field-input" placeholder="Enter a name for this profile" />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-outline" data-modal="modal-add-candidate">Cancel</button>
+        <button class="btn-primary" id="confirm-add-candidate">Create Profile</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Qualification Modal -->
+  <div id="modal-add-qualification" class="modal-overlay hidden">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Add Qualification Level</h3>
+        <button class="btn-icon modal-close" data-modal="modal-add-qualification">
+          <svg viewBox="0 0 24 24" fill="none"><line x1="18" y1="6" x2="6" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="6" y1="6" x2="18" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="field-label">Qualification Level</label>
+          <select id="qual-level-select" class="field-input">
+            <option value="10th">10th (Secondary)</option>
+            <option value="12th">10+2 / 12th (Higher Secondary)</option>
+            <option value="Diploma">Diploma</option>
+            <option value="UG">UG (Bachelor's Degree)</option>
+            <option value="PG">PG (Master's Degree)</option>
+            <option value="M.Phil">M.Phil</option>
+            <option value="PhD">PhD (Doctorate)</option>
+            <option value="Post-Doc">Post-Doctoral</option>
+            <option value="Custom">Custom / Other</option>
+          </select>
+        </div>
+        <div class="form-group hidden" id="custom-qual-group">
+          <label class="field-label">Custom Level Name</label>
+          <input type="text" id="custom-qual-name" class="field-input" placeholder="e.g., D.El.Ed, B.Ed" />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-outline" data-modal="modal-add-qualification">Cancel</button>
+        <button class="btn-primary" id="confirm-add-qualification">Add</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
